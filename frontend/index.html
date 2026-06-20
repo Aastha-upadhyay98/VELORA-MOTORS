@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Velora Motors | Premium Auto Parts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black:#06070b;
+    --navy:#0a1226;
+    --panel:#0d1326;
+    --panel2:#101a33;
+    --line:#1c2440;
+    --cyan:#2fd4ff;
+    --blue:#2563ff;
+    --white:#eef2fb;
+    --mute:#7d87a3;
+    --danger:#ff5b6e;
+    --success:#34e0a1;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--black);
+    color:var(--white);
+    font-family:'Inter',sans-serif;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.brand,.nav a,.cta,.tag,.promo{
+    font-family:'Oswald',sans-serif;
+    letter-spacing:0.01em;
+  }
+  a{color:inherit;text-decoration:none;}
+  button{font-family:inherit;}
+
+  /* ---- Promo bar ---- */
+  .promo{
+    background:linear-gradient(90deg, var(--blue), var(--cyan));
+    color:#06070b;
+    text-align:center;
+    font-size:14px;font-weight:600;
+    padding:9px 0;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+  }
+
+  /* ---- Header ---- */
+  header{
+    position:sticky;top:0;z-index:100;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 5%;
+    background:rgba(6,7,11,0.88);
+    -webkit-backdrop-filter:blur(8px);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .brand{font-size:22px;font-weight:700;color:var(--white);display:flex;align-items:center;gap:12px;text-transform:uppercase;cursor:pointer;border:none;background:none;}
+  .brand .mark{
+    width:34px;height:34px;border-radius:50%;
+    border:1.5px solid var(--cyan);
+    display:flex;align-items:center;justify-content:center;
+    font-size:14px;font-weight:700;color:var(--cyan);
+    box-shadow:0 0 14px rgba(47,212,255,0.35);
+  }
+  .brand small{display:block;font-size:10px;color:var(--mute);font-weight:500;letter-spacing:0.18em;font-family:'Inter',sans-serif;}
+  nav.nav{display:flex;gap:36px;}
+  .nav a{font-size:14px;font-weight:500;color:var(--mute);transition:color .2s;text-transform:uppercase;letter-spacing:0.05em;position:relative;background:none;border:none;cursor:pointer;}
+  .nav a:hover{color:var(--white);}
+  .nav a.active{color:var(--white);}
+  .nav a.active::after{content:"";position:absolute;left:0;bottom:-22px;width:100%;height:2px;background:var(--cyan);}
+  .header-cta{
+    background:var(--cyan);color:#06070b;padding:11px 24px;border-radius:3px;
+    font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:0.04em;border:none;cursor:pointer;
+  }
+  .header-cta:hover{background:#5fe0ff;}
+
+  /* ---- Mobile menu ---- */
+  .mobile-toggle{display:none;background:none;border:none;color:var(--white);cursor:pointer;padding:4px;}
+  .mobile-toggle svg{width:26px;height:26px;}
+  .mobile-menu{
+    display:none;position:fixed;inset:0;z-index:200;background:rgba(6,7,11,0.97);
+    flex-direction:column;align-items:center;justify-content:center;gap:30px;
+  }
+  .mobile-menu.open{display:flex;}
+  .mobile-menu a{font-size:22px;text-transform:uppercase;color:var(--white);background:none;border:none;cursor:pointer;}
+  .mobile-menu .close-x{position:absolute;top:24px;right:28px;background:none;border:none;color:var(--white);cursor:pointer;}
+  .mobile-menu .close-x svg{width:28px;height:28px;}
+
+  /* ---- Hero with Ken Burns live motion ---- */
+  .hero{
+    position:relative;
+    min-height:92vh;
+    display:flex;align-items:center;
+    padding:0 5%;
+    overflow:hidden;
+  }
+  .hero-media{
+    position:absolute;inset:0;z-index:0;overflow:hidden;
+  }
+  .hero-media img{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:60% 45%;
+    animation:kenburns 18s ease-in-out infinite alternate;
+    filter:brightness(0.62) saturate(1.15);
+  }
+  @keyframes kenburns{
+    0%{transform:scale(1) translate(0,0);}
+    100%{transform:scale(1.12) translate(-1.5%, -1%);}
+  }
+  .hero-media::after{
+    content:"";position:absolute;inset:0;z-index:1;
+    background:
+      linear-gradient(100deg, rgba(6,7,11,0.94) 0%, rgba(6,7,11,0.72) 32%, rgba(6,7,11,0.35) 58%, rgba(6,7,11,0.55) 100%),
+      radial-gradient(ellipse 60% 60% at 80% 70%, rgba(47,212,255,0.16), transparent 65%);
+  }
+  .live-badge{
+    position:absolute;z-index:2;top:28px;right:5%;display:flex;align-items:center;gap:8px;
+    background:rgba(6,7,11,0.6);border:1px solid var(--line);border-radius:30px;padding:7px 14px;
+    font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--mute);
+  }
+  .live-dot{width:7px;height:7px;border-radius:50%;background:var(--cyan);box-shadow:0 0 8px var(--cyan);animation:pulse 1.6s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.35;}}
+
+  .hero-content{position:relative;z-index:3;max-width:680px;}
+  .tag{
+    color:var(--cyan);font-size:13px;font-weight:600;
+    letter-spacing:0.2em;text-transform:uppercase;margin-bottom:20px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .tag::before{content:"";width:26px;height:2px;background:var(--cyan);}
+  .hero h1{
+    font-size:clamp(38px,6.4vw,72px);
+    line-height:1.04;font-weight:700;color:var(--white);
+    text-transform:uppercase;
+  }
+  .hero h1 .accent{
+    background:linear-gradient(90deg,var(--cyan),var(--blue));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero p{margin-top:22px;max-width:460px;color:var(--mute);font-size:17px;line-height:1.65;}
+  .hero-actions{margin-top:36px;display:flex;gap:16px;flex-wrap:wrap;}
+  .cta{
+    padding:16px 30px;border-radius:3px;font-weight:600;font-size:14px;
+    text-transform:uppercase;letter-spacing:0.05em;border:none;cursor:pointer;
+    transition:background .2s, border-color .2s, transform .15s;
+  }
+  .cta:active{transform:scale(0.97);}
+  .cta.primary{background:var(--cyan);color:#06070b;}
+  .cta.primary:hover{background:#5fe0ff;}
+  .cta.ghost{border:1px solid var(--line);color:var(--white);background:none;}
+  .cta.ghost:hover{border-color:var(--cyan);}
+
+  /* ---- Section shared ---- */
+  section{padding:100px 5%;}
+  .section-head{max-width:620px;margin-bottom:50px;}
+  .section-head.center{margin-left:auto;margin-right:auto;text-align:center;}
+  .eyebrow{color:var(--cyan);font-size:12px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;}
+  .section-head h2{font-size:clamp(28px,3.6vw,42px);text-transform:uppercase;margin-top:10px;color:var(--white);}
+  .section-head p{color:var(--mute);margin-top:14px;font-size:16px;line-height:1.6;}
+
+  /* ---- Why choose us stats ---- */
+  .stats{background:var(--navy);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;}
+  .stat-card{
+    padding:30px 24px;border:1px solid var(--line);border-radius:6px;background:var(--black);
+    text-align:center;
+  }
+  .stat-icon{width:50px;height:50px;border-radius:50%;background:rgba(47,212,255,0.1);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;}
+  .stat-icon svg{width:22px;height:22px;}
+  .stat-card strong{display:block;font-family:'Oswald',sans-serif;font-size:32px;color:var(--cyan);}
+  .stat-card span{display:block;margin-top:6px;font-size:13px;color:var(--mute);text-transform:uppercase;letter-spacing:0.06em;}
+
+  /* ---- Catalog: swipeable row ---- */
+  .filter-row{display:flex;gap:16px;overflow-x:auto;padding-bottom:6px;margin-bottom:42px;-ms-overflow-style:none;}
+  .filter-row::-webkit-scrollbar{display:none;}
+  .filter-chip{
+    flex:0 0 auto;border:1px solid var(--line);border-radius:30px;
+    padding:9px 20px;font-size:13px;color:var(--mute);font-weight:500;
+    white-space:nowrap;text-transform:uppercase;letter-spacing:0.03em;
+    background:none;cursor:pointer;transition:border-color .2s, color .2s, background .2s;
+  }
+  .filter-chip.active{border-color:var(--cyan);color:var(--white);background:rgba(47,212,255,0.08);}
+
+  .carousel-wrap{position:relative;}
+  .carousel{
+    display:flex;gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;
+    padding:4px 4px 22px;margin:0 -4px;
+  }
+  @supports (scrollbar-width: thin) {
+    .carousel{scrollbar-width:thin;scrollbar-color:var(--cyan) var(--panel);}
+  }
+  .carousel::-webkit-scrollbar{height:6px;}
+  .carousel::-webkit-scrollbar-track{background:var(--panel);border-radius:10px;}
+  .carousel::-webkit-scrollbar-thumb{background:var(--cyan);border-radius:10px;}
+
+  .card{
+    flex:0 0 auto;width:280px;scroll-snap-align:start;
+    background:var(--panel);border:1px solid var(--line);border-radius:8px;overflow:hidden;
+    transition:transform .25s, border-color .25s;
+    cursor:pointer;
+  }
+  .card:hover{transform:translateY(-6px);border-color:var(--cyan);}
+  .card-art{
+    height:190px;position:relative;overflow:hidden;
+    background:#0a0e1c;
+    border-bottom:1px solid var(--line);
+  }
+  .card-art img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease;filter:saturate(1.1) contrast(1.05);}
+  .card:hover .card-art img{transform:scale(1.08);}
+  .card-art .tag-badge{
+    position:absolute;top:12px;left:12px;background:rgba(6,7,11,0.75);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);
+    border:1px solid rgba(47,212,255,0.4);color:var(--cyan);font-size:10px;font-weight:600;
+    text-transform:uppercase;letter-spacing:0.08em;padding:5px 10px;border-radius:20px;
+  }
+  .card-body{padding:20px;}
+  .card-body h3{font-size:17px;color:var(--white);text-transform:uppercase;font-weight:600;font-family:'Oswald',sans-serif;}
+  .card-body p{color:var(--mute);font-size:13px;margin-top:8px;line-height:1.5;min-height:39px;}
+  .card-meta{display:flex;justify-content:space-between;align-items:center;margin-top:16px;padding-top:14px;border-top:1px solid var(--line);}
+  .price{color:var(--cyan);font-weight:700;font-family:'Oswald',sans-serif;font-size:16px;}
+  .fit{font-size:11px;color:var(--mute);text-transform:uppercase;}
+  .add-cart-btn{
+    margin-top:12px;width:100%;padding:10px;background:none;border:1px solid var(--line);color:var(--white);
+    font-size:12px;text-transform:uppercase;letter-spacing:0.05em;border-radius:4px;cursor:pointer;
+    transition:background .2s, border-color .2s;font-weight:600;
+  }
+  .add-cart-btn:hover{border-color:var(--cyan);background:rgba(47,212,255,0.08);}
+  .add-cart-btn.added{background:var(--cyan);color:#06070b;border-color:var(--cyan);}
+
+  .carousel-nav{display:flex;gap:10px;justify-content:flex-end;margin-top:-8px;}
+  .nav-btn{
+    width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:var(--panel);
+    display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--white);
+    transition:border-color .2s, background .2s;
+  }
+  .nav-btn:hover{border-color:var(--cyan);background:rgba(47,212,255,0.08);}
+  .nav-btn svg{width:18px;height:18px;}
+  .swipe-hint{display:none;font-size:12px;color:var(--mute);text-align:center;margin-top:4px;letter-spacing:0.04em;text-transform:uppercase;}
+
+  /* ---- Cart toast ---- */
+  .toast{
+    position:fixed;bottom:28px;right:28px;z-index:300;
+    background:var(--panel);border:1px solid var(--cyan);border-radius:8px;
+    padding:16px 20px;display:flex;align-items:center;gap:12px;
+    box-shadow:0 12px 40px rgba(0,0,0,0.5);
+    transform:translateY(20px);opacity:0;pointer-events:none;
+    transition:transform .3s ease, opacity .3s ease;
+    max-width:320px;
+  }
+  .toast.show{transform:translateY(0);opacity:1;}
+  .toast-icon{width:22px;height:22px;color:var(--cyan);flex-shrink:0;}
+  .toast-text strong{display:block;font-size:13px;color:var(--white);}
+  .toast-text span{font-size:12px;color:var(--mute);}
+
+  /* ---- Services (real car backdrop) ---- */
+  .services{
+    position:relative;
+    overflow:hidden;
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    min-height:640px;
+    display:flex;align-items:center;
+  }
+  .services-bg{position:absolute;inset:0;z-index:0;}
+  .services-bg img{width:100%;height:100%;object-fit:cover;object-position:50% 40%;filter:brightness(0.55) saturate(1.1);}
+  .services-bg::after{
+    content:"";position:absolute;inset:0;
+    background:
+      linear-gradient(180deg, rgba(6,7,11,0.55) 0%, rgba(6,7,11,0.78) 60%, rgba(6,7,11,0.92) 100%),
+      radial-gradient(ellipse 60% 50% at 50% 30%, rgba(37,99,255,0.18), transparent 70%);
+  }
+  .services .section-head{position:relative;z-index:2;}
+  .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;position:relative;z-index:2;width:100%;}
+  .service-card{padding:32px;background:rgba(6,7,11,0.7);border:1px solid var(--line);border-radius:6px;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);}
+  .service-icon{width:48px;height:48px;border-radius:50%;background:rgba(47,212,255,0.12);display:flex;align-items:center;justify-content:center;margin-bottom:18px;}
+  .service-icon svg{width:22px;height:22px;}
+  .service-card h3{font-size:18px;text-transform:uppercase;color:var(--white);}
+  .service-card p{margin-top:10px;color:var(--mute);font-size:14px;line-height:1.6;}
+
+  /* ---- Testimonials ---- */
+  .testimonials-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;}
+  .testimonial-card{padding:30px;border:1px solid var(--line);border-radius:6px;background:var(--panel);}
+  .testimonial-card .quote-icon{color:var(--cyan);font-size:13px;}
+  .testimonial-card p{margin-top:14px;color:var(--white);font-size:15px;line-height:1.6;}
+  .testimonial-person{display:flex;align-items:center;gap:12px;margin-top:20px;}
+  .avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--cyan));display:flex;align-items:center;justify-content:center;font-weight:700;font-family:'Oswald',sans-serif;color:#06070b;}
+  .testimonial-person div strong{display:block;font-size:14px;color:var(--white);}
+  .testimonial-person div span{font-size:12px;color:var(--mute);}
+  .stars{color:#ffb020;font-size:13px;margin-top:4px;}
+
+  /* ---- Marquee ---- */
+  .marquee-strip{
+    position:relative;overflow:hidden;background:var(--navy);
+    padding:18px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  }
+  .marquee-track{display:flex;width:200%;animation:marquee 26s linear infinite;}
+  .marquee-track span{
+    font-family:'Oswald',sans-serif;font-weight:600;font-size:20px;
+    color:var(--mute);text-transform:uppercase;letter-spacing:0.1em;
+    padding:0 30px;white-space:nowrap;display:flex;align-items:center;gap:14px;
+  }
+  .marquee-track span::after{content:"\2022";color:var(--cyan);}
+  @keyframes marquee{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
+
+  /* ---- Newsletter ---- */
+  .newsletter{
+    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px;
+    background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:36px 40px;
+  }
+  .newsletter h3{font-size:22px;text-transform:uppercase;color:var(--white);}
+  .newsletter p{color:var(--mute);font-size:14px;margin-top:6px;}
+  .newsletter-form{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start;}
+  .newsletter-form input{
+    background:var(--black);border:1px solid var(--line);border-radius:4px;
+    padding:13px 16px;color:var(--white);font-size:14px;min-width:240px;
+  }
+  .newsletter-form input:focus{outline:2px solid var(--cyan);border-color:transparent;}
+  .newsletter-form input.invalid{border-color:var(--danger);}
+  .form-msg{width:100%;font-size:13px;margin-top:4px;display:none;}
+  .form-msg.show{display:block;}
+  .form-msg.success{color:var(--success);}
+  .form-msg.error{color:var(--danger);}
+
+  /* ---- Contact ---- */
+  .contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;}
+  .contact-info h2{font-size:clamp(28px,3.6vw,40px);text-transform:uppercase;color:var(--white);}
+  .contact-info p{color:var(--mute);margin-top:16px;line-height:1.7;font-size:16px;max-width:440px;}
+  .info-row{display:flex;gap:16px;align-items:flex-start;margin-top:26px;}
+  .info-icon{width:40px;height:40px;border-radius:50%;background:var(--cyan);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .info-icon svg{width:18px;height:18px;fill:#06070b;}
+  .info-row a, .info-row span.val{font-size:16px;font-weight:600;font-family:'Oswald',sans-serif;color:var(--white);}
+  .info-row .label{display:block;font-size:11px;color:var(--mute);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:3px;}
+  .hours-table{margin-top:10px;display:flex;flex-direction:column;gap:6px;}
+  .hours-row{display:flex;justify-content:space-between;max-width:260px;font-size:14px;color:var(--mute);border-bottom:1px dashed var(--line);padding-bottom:6px;}
+  .hours-row strong{color:var(--white);font-weight:500;}
+
+  form.inquiry-form{display:flex;flex-direction:column;gap:16px;background:var(--panel);padding:32px;border:1px solid var(--line);border-radius:6px;}
+  .field{display:flex;flex-direction:column;gap:8px;position:relative;}
+  .field label{font-size:12px;color:var(--mute);text-transform:uppercase;letter-spacing:0.05em;}
+  .field input,.field select,.field textarea{
+    background:var(--black);border:1px solid var(--line);border-radius:3px;
+    padding:13px 14px;color:var(--white);font-family:'Inter',sans-serif;font-size:15px;
+  }
+  .field input:focus,.field select:focus,.field textarea:focus{outline:2px solid var(--cyan);border-color:transparent;}
+  .field input.invalid,.field textarea.invalid{border-color:var(--danger);}
+  .field-error{font-size:12px;color:var(--danger);display:none;}
+  .field-error.show{display:block;}
+  .field textarea{resize:vertical;min-height:90px;}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .submit-status{font-size:14px;padding:12px 14px;border-radius:4px;display:none;margin-top:-4px;}
+  .submit-status.show{display:block;}
+  .submit-status.success{background:rgba(52,224,161,0.1);border:1px solid var(--success);color:var(--success);}
+  .submit-status.error{background:rgba(255,91,110,0.1);border:1px solid var(--danger);color:var(--danger);}
+  .btn-spinner{display:inline-block;width:14px;height:14px;border:2px solid rgba(6,7,11,0.3);border-top-color:#06070b;border-radius:50%;animation:spin 0.7s linear infinite;margin-right:8px;vertical-align:-2px;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+
+  /* ---- Footer ---- */
+  footer{border-top:1px solid var(--line);padding:50px 5% 30px;}
+  .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:30px;margin-bottom:40px;}
+  .footer-brand .brand{font-size:18px;}
+  .footer-brand p{margin-top:12px;color:var(--mute);font-size:13px;max-width:240px;}
+  .footer-col h4{font-size:14px;text-transform:uppercase;color:var(--white);margin-bottom:14px;letter-spacing:0.06em;}
+  .footer-col a{display:block;color:var(--mute);font-size:14px;margin-bottom:10px;background:none;border:none;cursor:pointer;text-align:left;}
+  .footer-col a:hover{color:var(--cyan);}
+  .pay-icons{display:flex;gap:10px;margin-top:6px;}
+  .pay-icons span{
+    border:1px solid var(--line);border-radius:4px;padding:6px 10px;font-size:12px;color:var(--mute);
+  }
+  .footer-bottom{
+    border-top:1px solid var(--line);padding-top:24px;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
+    color:var(--mute);font-size:13px;
+  }
+
+  /* ---- Modal (FAQ/Policy quick views) ---- */
+  .modal-overlay{
+    display:none;position:fixed;inset:0;z-index:400;background:rgba(6,7,11,0.85);
+    align-items:center;justify-content:center;padding:20px;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);
+  }
+  .modal-overlay.open{display:flex;}
+  .modal-box{
+    background:var(--panel);border:1px solid var(--line);border-radius:8px;
+    max-width:480px;width:100%;padding:32px;position:relative;max-height:80vh;overflow-y:auto;
+  }
+  .modal-box h3{font-size:20px;text-transform:uppercase;color:var(--white);margin-bottom:14px;}
+  .modal-box p{color:var(--mute);font-size:14px;line-height:1.7;margin-bottom:10px;}
+  .modal-close{position:absolute;top:16px;right:16px;background:none;border:none;color:var(--mute);cursor:pointer;}
+  .modal-close svg{width:22px;height:22px;}
+  .modal-close:hover{color:var(--white);}
+
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+  .inquiry-submit{margin-top:6px;}
+  .newsletter-section{padding-top:0;}
+  .footer-brand-btn{cursor:default;}
+  .location-val{display:block;color:var(--mute);font-size:14px;}
+
+  @media (max-width:900px){
+    .nav{display:none;}
+    .mobile-toggle{display:block;}
+    .stats-grid,.testimonials-grid{grid-template-columns:1fr;}
+    .services-grid{grid-template-columns:1fr;}
+    .contact-wrap{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+    .hero h1{font-size:42px;}
+    .card{width:240px;}
+    .swipe-hint{display:block;}
+    .carousel-nav{display:none;}
+    .row2{grid-template-columns:1fr;}
+    .toast{right:16px;left:16px;bottom:16px;max-width:none;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .reveal{transition:none;opacity:1;transform:none;}
+    .marquee-track{animation:none;}
+    .hero-media img{animation:none;}
+    .live-dot{animation:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="promo">15% Off Your First Order — Mention Code VELORA15</div>
+
+<header>
+  <button class="brand" onclick="document.getElementById('home').scrollIntoView()"><span class="mark">V</span><span>Velora<br><small>MOTORS</small></span></button>
+  <nav class="nav">
+    <a href="#home" class="active" data-nav>Home</a>
+    <a href="#about" data-nav>About</a>
+    <a href="#catalog" data-nav>Catalog</a>
+    <a href="#services" data-nav>Services</a>
+    <a href="#contact" data-nav>Contact</a>
+  </nav>
+  <a class="header-cta" href="tel:+919594102353">Contact Us</a>
+  <button class="mobile-toggle" id="mobileToggle" aria-label="Open menu">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+  </button>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="close-x" id="mobileClose" aria-label="Close menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+  <a href="#home" data-nav-mobile>Home</a>
+  <a href="#about" data-nav-mobile>About</a>
+  <a href="#catalog" data-nav-mobile>Catalog</a>
+  <a href="#services" data-nav-mobile>Services</a>
+  <a href="#contact" data-nav-mobile>Contact</a>
+</div>
+
+<section class="hero" id="home">
+  <div class="hero-media">
+    <img src="assets/hero-car.png" alt="Black supercar with cyan neon trim lighting" id="heroImg" />
+  </div>
+  <div class="live-badge"><span class="live-dot"></span>Live</div>
+
+  <div class="hero-content">
+    <div class="tag">Premium Auto Parts</div>
+    <h1>Engineered for<br>the <span class="accent">Driven.</span></h1>
+    <p>Genuine and performance-grade parts for premium and exotic vehicles — exhausts, wheels, brakes, body kits, and more, all under one roof.</p>
+    <div class="hero-actions">
+      <button class="cta primary" onclick="document.getElementById('catalog').scrollIntoView()">Browse Catalog</button>
+      <a class="cta ghost" href="tel:+919594102353">Call +91 95941 02353</a>
+    </div>
+  </div>
+</section>
+
+<section class="stats" id="about">
+  <div class="section-head center reveal">
+    <div class="eyebrow">Why Choose Us</div>
+    <h2>Trusted across the country</h2>
+    <p>We deliver high-quality auto parts, real support, and dependable turnaround — every time.</p>
+  </div>
+  <div class="stats-grid">
+    <div class="stat-card reveal">
+      <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2fd4ff" stroke-width="1.6"><circle cx="9" cy="7" r="3"/><path d="M2 21v-2a4 4 0 014-4h6a4 4 0 014 4v2"/><circle cx="17" cy="7" r="2.5"/></svg></div>
+      <strong>3.7K+</strong>
+      <span>Trusted Clients</span>
+    </div>
+    <div class="stat-card reveal">
+      <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2fd4ff" stroke-width="1.6"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg></div>
+      <strong>100%</strong>
+      <span>Quality Assurance</span>
+    </div>
+    <div class="stat-card reveal">
+      <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2fd4ff" stroke-width="1.6"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.8 19.8 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.12.9.32 1.78.6 2.63a2 2 0 01-.45 2.11L8.1 9.62a16 16 0 006 6l1.16-1.16a2 2 0 012.11-.45c.85.28 1.73.48 2.63.6A2 2 0 0122 16.92z"/></svg></div>
+      <strong>24/7</strong>
+      <span>Customer Support</span>
+    </div>
+    <div class="stat-card reveal">
+      <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2fd4ff" stroke-width="1.6"><rect x="1" y="7" width="15" height="10" rx="1"/><path d="M16 10h3l3 3v4h-6z"/><circle cx="6" cy="19" r="1.6"/><circle cx="18.5" cy="19" r="1.6"/></svg></div>
+      <strong>24h</strong>
+      <span>Dispatch Window</span>
+    </div>
+  </div>
+</section>
+
+<section id="catalog">
+  <div class="section-head reveal">
+    <div class="eyebrow">Catalog</div>
+    <h2>All Auto Parts</h2>
+    <p>Swipe through a wide selection of performance parts for cars and trucks.</p>
+  </div>
+
+  <div class="filter-row">
+    <button class="filter-chip active" data-filter="all">All</button>
+    <button class="filter-chip" data-filter="exhaust">Exhaust</button>
+    <button class="filter-chip" data-filter="wheels">Wheels &amp; Brakes</button>
+    <button class="filter-chip" data-filter="body">Body Kits</button>
+    <button class="filter-chip" data-filter="suspension">Suspension</button>
+    <button class="filter-chip" data-filter="interior">Interior</button>
+  </div>
+
+  <div class="carousel-wrap reveal">
+    <div class="carousel" id="catalogCarousel">
+      <div class="card" data-cat="exhaust" data-name="Titanium Exhaust System" data-price="₹5,40,000">
+        <div class="card-art">
+          <img src="assets/crop-suspension.jpg" alt="Titanium exhaust glow underbody detail" loading="lazy">
+          <span class="tag-badge">Exhaust</span>
+        </div>
+        <div class="card-body">
+          <h3>Titanium Exhaust System</h3>
+          <p>Valved cat-back system, weight reduction, deeper tone.</p>
+          <div class="card-meta"><span class="price">₹5,40,000</span><span class="fit">Universal fit</span></div>
+          <button class="add-cart-btn" data-add>Add to Inquiry</button>
+        </div>
+      </div>
+      <div class="card" data-cat="wheels" data-name="Forged Alloy Wheel Set" data-price="₹3,20,000">
+        <div class="card-art">
+          <img src="assets/crop-wheel-front.jpg" alt="Forged alloy wheel with cyan rim glow" loading="lazy">
+          <span class="tag-badge">Wheels</span>
+        </div>
+        <div class="card-body">
+          <h3>Forged Alloy Wheel Set</h3>
+          <p>Lightweight staggered set, multiple bolt patterns available.</p>
+          <div class="card-meta"><span class="price">₹3,20,000</span><span class="fit">19"–21"</span></div>
+          <button class="add-cart-btn" data-add>Add to Inquiry</button>
+        </div>
+      </div>
+      <div class="card" data-cat="wheels" data-name="Performance Brake Kit" data-price="₹4,10,000">
+        <div class="card-art">
+          <img src="assets/crop-wheel-rear.jpg" alt="Performance brake and rotor detail" loading="lazy">
+          <span class="tag-badge">Brakes</span>
+        </div>
+        <div class="card-body">
+          <h3>Performance Brake Kit</h3>
+          <p>6-piston monobloc calipers with carbon-ceramic rotors.</p>
+          <div class="card-meta"><span class="price">₹4,10,000</span><span class="fit">Multi-fit</span></div>
+          <button class="add-cart-btn" data-add>Add to Inquiry</button>
+        </div>
+      </div>
+      <div class="card" data-cat="body" data-name="Carbon Front Splitter" data-price="₹1,25,000">
+        <div class="card-art">
+          <img src="assets/crop-splitter-v2.jpg" alt="Carbon front splitter and mesh grille detail" loading="lazy">
+          <span class="tag-badge">Body Kit</span>
+        </div>
+        <div class="card-body">
+          <h3>Carbon Front Splitter</h3>
+          <p>Aero-tuned, dry carbon weave, paint-ready finish.</p>
+          <div class="card-meta"><span class="price">₹1,25,000</span><span class="fit">Model-specific</span></div>
+          <button class="add-cart-btn" data-add>Add to Inquiry</button>
+        </div>
+      </div>
+      <div class="card" data-cat="suspension" data-name="Adjustable Coilover Set" data-price="₹2,80,000">
+        <div class="card-art">
+          <img src="assets/crop-side.jpg" alt="Lowered stance suspension and wheel arch detail" loading="lazy">
+          <span class="tag-badge">Suspension</span>
+        </div>
+        <div class="card-body">
+          <h3>Adjustable Coilover Set</h3>
+          <p>Track-tuned damping with ride-height adjustment.</p>
+          <div class="card-meta"><span class="price">₹2,80,000</span><span class="fit">Multi-fit</span></div>
+          <button class="add-cart-btn" data-add>Add to Inquiry</button>
+        </div>
+      </div>
+      <div class="card" data-cat="body" data-name="Matrix LED Headlamp" data-price="₹98,000">
+        <div class="card-art">
+          <img src="assets/crop-headlamp.jpg" alt="Matrix LED headlamp detail" loading="lazy">
+          <span class="tag-badge">Lighting</span>
+        </div>
+        <div class="card-body">
+          <h3>Matrix LED Headlamp</h3>
+          <p>Direct-plug housing, factory beam pattern, OEM connector.</p>
+          <div class="card-meta"><span class="price">₹98,000</span><span class="fit">Model-specific</span></div>
+          <button class="add-cart-btn" data-add>Add to Inquiry</button>
+        </div>
+      </div>
+      <div class="card" data-cat="body" data-name="Carbon Rear Wing" data-price="₹1,95,000">
+        <div class="card-art">
+          <img src="assets/crop-bodyline.jpg" alt="Carbon rear wing and roofline detail" loading="lazy">
+          <span class="tag-badge">Body Kit</span>
+        </div>
+        <div class="card-body">
+          <h3>Carbon Rear Wing</h3>
+          <p>Track-spec downforce, factory mount points, dry carbon.</p>
+          <div class="card-meta"><span class="price">₹1,95,000</span><span class="fit">Model-specific</span></div>
+          <button class="add-cart-btn" data-add>Add to Inquiry</button>
+        </div>
+      </div>
+      <div class="card" data-cat="interior" data-name="Alcantara Interior Trim" data-price="₹2,30,000">
+        <div class="card-art">
+          <img src="assets/crop-interior.jpg" alt="Alcantara cabin trim detail" loading="lazy">
+          <span class="tag-badge">Interior</span>
+        </div>
+        <div class="card-body">
+          <h3>Alcantara Interior Trim</h3>
+          <p>Full retrim kit, factory colour codes, hand-stitched.</p>
+          <div class="card-meta"><span class="price">₹2,30,000</span><span class="fit">Universal fit</span></div>
+          <button class="add-cart-btn" data-add>Add to Inquiry</button>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-nav">
+      <button class="nav-btn" id="prevBtn" aria-label="Scroll left"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <button class="nav-btn" id="nextBtn" aria-label="Scroll right"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></button>
+    </div>
+    <div class="swipe-hint">Swipe to explore</div>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="services-bg">
+    <img src="assets/hero-car.png" alt="">
+  </div>
+
+  <div class="section-head center reveal">
+    <div class="eyebrow">What We Offer</div>
+    <h2>Services We Provide</h2>
+    <p>Support that follows you from sourcing to installation.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2fd4ff" stroke-width="1.6"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg></div>
+      <h3>Fitment Verification</h3>
+      <p>Send your VIN or trim and we confirm exact compatibility before you order.</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2fd4ff" stroke-width="1.6"><path d="M3 7h18M3 12h18M3 17h18"/></svg></div>
+      <h3>Bulk &amp; Workshop Orders</h3>
+      <p>Dedicated pricing and priority dispatch for garages and dealerships.</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2fd4ff" stroke-width="1.6"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+      <h3>Installation Network</h3>
+      <p>We refer you to vetted installers in your city for every part we ship.</p>
+    </div>
+  </div>
+</section>
+
+<section id="testimonials">
+  <div class="section-head center reveal">
+    <div class="eyebrow">Testimonials</div>
+    <h2>What Our Customers Say</h2>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testimonial-card reveal">
+      <div class="quote-icon">&#10077;&#10077;</div>
+      <p>Amazing quality and fast delivery! I found every part I needed for my car at the best prices. Highly recommended.</p>
+      <div class="testimonial-person">
+        <div class="avatar">H</div>
+        <div><strong>Harry</strong><span>Auto Enthusiast</span><div class="stars">★★★★★</div></div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal">
+      <div class="quote-icon">&#10077;&#10077;</div>
+      <p>The customer service is outstanding. They helped me choose the exact parts I needed. I'll definitely shop here again.</p>
+      <div class="testimonial-person">
+        <div class="avatar">J</div>
+        <div><strong>Jane Smith</strong><span>Mechanic</span><div class="stars">★★★★★</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee-strip">
+  <div class="marquee-track">
+    <span>Engineered Without Limits</span><span>Built For The Driven</span><span>Genuine Fit Guaranteed</span>
+    <span>Engineered Without Limits</span><span>Built For The Driven</span><span>Genuine Fit Guaranteed</span>
+  </div>
+</div>
+
+<section id="contact">
+  <div class="contact-wrap">
+    <div class="contact-info reveal">
+      <div class="eyebrow">Get in touch</div>
+      <h2>Talk to Velora Motors</h2>
+      <p>Tell us your car, the part, and your city — we'll confirm stock and the fastest way to get it to you.</p>
+
+      <div class="info-row">
+        <div class="info-icon"><svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.5 2.5.8 3.8.8.6 0 1 .4 1 1v3.4c0 .6-.4 1-1 1C10.6 21.2 2.8 13.4 2.8 4.8c0-.6.4-1 1-1H7.2c.6 0 1 .4 1 1 0 1.3.3 2.6.8 3.8.2.3.1.7-.2 1L6.6 10.8z"/></svg></div>
+        <div><span class="label">Phone</span><a href="tel:+919594102353">+91 95941 02353</a></div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon"><svg viewBox="0 0 24 24"><path d="M3 6l9 7 9-7M4 5h16a1 1 0 011 1v12a1 1 0 01-1 1H4a1 1 0 01-1-1V6a1 1 0 011-1z"/></svg></div>
+        <div><span class="label">Email</span><a href="mailto:support@veloramotors.in">support@veloramotors.in</a></div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon"><svg viewBox="0 0 24 24"><path d="M12 2C8 2 5 5 5 9c0 5 7 13 7 13s7-8 7-13c0-4-3-7-7-7zm0 9.5A2.5 2.5 0 1112 6a2.5 2.5 0 010 5.5z"/></svg></div>
+        <div><span class="label">Location</span><span class="location-val">Mumbai, Maharashtra</span></div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon"><svg viewBox="0 0 24 24"><path d="M12 7v5l3 3M12 2a10 10 0 100 20 10 10 0 000-20z"/></svg></div>
+        <div>
+          <span class="label">Working Hours</span>
+          <div class="hours-table">
+            <div class="hours-row"><span>Mon – Sat</span><strong>10:00 AM – 7:00 PM</strong></div>
+            <div class="hours-row"><span>Sunday</span><strong>Closed</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <form class="inquiry-form" id="inquiryForm" novalidate>
+      <div class="row2">
+        <div class="field">
+          <label for="fullName">Full name</label>
+          <input type="text" id="fullName" name="fullName" placeholder="Your name">
+          <span class="field-error" id="fullNameError">Please enter your name.</span>
+        </div>
+        <div class="field">
+          <label for="phone">Phone</label>
+          <input type="tel" id="phone" name="phone" placeholder="Your number">
+          <span class="field-error" id="phoneError">Enter a valid 10-digit phone number.</span>
+        </div>
+      </div>
+      <div class="field">
+        <label for="carModel">Car make &amp; model</label>
+        <input type="text" id="carModel" name="carModel" placeholder="e.g. Porsche 911, BMW M4">
+      </div>
+      <div class="field">
+        <label for="partNeeded">Part needed</label>
+        <textarea id="partNeeded" name="partNeeded" placeholder="Describe the part, condition, or issue"></textarea>
+        <span class="field-error" id="partNeededError">Please describe what you need.</span>
+      </div>
+      <div class="submit-status" id="inquiryStatus"></div>
+      <button class="cta primary inquiry-submit" type="submit" id="inquirySubmitBtn">Send Inquiry</button>
+    </form>
+  </div>
+</section>
+
+<section id="newsletter-wrap" class="newsletter-section">
+  <div class="newsletter reveal">
+    <div>
+      <h3>Subscribe to Our Newsletter</h3>
+      <p>Stay updated on the latest auto parts offers and updates.</p>
+    </div>
+    <form class="newsletter-form" id="newsletterForm" novalidate>
+      <input type="email" id="newsletterEmail" placeholder="Enter your email">
+      <button class="cta primary" type="submit" id="newsletterBtn">Subscribe</button>
+      <div class="form-msg" id="newsletterMsg"></div>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="brand footer-brand-btn"><span class="mark">V</span><span>Velora<br><small>MOTORS</small></span></div>
+      <p>Your trusted partner for high-quality, genuine-fit auto parts.</p>
+      <div class="pay-icons"><span>Mastercard</span><span>PayPal</span><span>UPI</span></div>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <a href="#catalog" data-nav>Car Accessories</a>
+      <a href="#catalog" data-nav>Engine Parts</a>
+      <a href="#catalog" data-nav>Tools &amp; Equipment</a>
+      <a href="#contact" data-nav>Contact Us</a>
+    </div>
+    <div class="footer-col">
+      <h4>Support</h4>
+      <a data-modal="faq">FAQs</a>
+      <a data-modal="privacy">Privacy Policy</a>
+      <a data-modal="shipping">Shipping Information</a>
+      <a data-modal="terms">Terms &amp; Conditions</a>
+    </div>
+    <div class="footer-col">
+      <h4>Reach Us</h4>
+      <a href="tel:+919594102353">+91 95941 02353</a>
+      <a href="mailto:support@veloramotors.in">support@veloramotors.in</a>
+      <span class="location-val">Mumbai, Maharashtra</span>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2026 Velora Motors. All rights reserved.</span>
+    <span>For genuine parts inquiries only.</span>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-box">
+    <button class="modal-close" id="modalClose"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<div class="toast" id="cartToast">
+  <svg class="toast-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+  <div class="toast-text"><strong id="toastTitle">Added</strong><span id="toastSub"></span></div>
+</div>
+
+<script>
+  // ---- Reveal on scroll ----
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+
+  // ---- Catalog filter ----
+  const chips = document.querySelectorAll('.filter-chip');
+  const cards = document.querySelectorAll('#catalogCarousel .card');
+  chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      chips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      const filter = chip.dataset.filter;
+      cards.forEach(card => {
+        card.style.display = (filter === 'all' || card.dataset.cat === filter) ? '' : 'none';
+      });
+    });
+  });
+
+  // ---- Carousel arrow nav ----
+  const carousel = document.getElementById('catalogCarousel');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const scrollAmount = 304;
+  prevBtn.addEventListener('click', () => carousel.scrollBy({left: -scrollAmount * 2, behavior: 'smooth'}));
+  nextBtn.addEventListener('click', () => carousel.scrollBy({left: scrollAmount * 2, behavior: 'smooth'}));
+
+  // ---- Add to inquiry (cart-style toast) + localStorage ----
+  function getInquiryList(){
+    try{ return JSON.parse(localStorage.getItem('velora_inquiry_items') || '[]'); }
+    catch(e){ return []; }
+  }
+  function saveInquiryList(list){
+    try{ localStorage.setItem('velora_inquiry_items', JSON.stringify(list)); }catch(e){}
+  }
+  const toast = document.getElementById('cartToast');
+  const toastTitle = document.getElementById('toastTitle');
+  const toastSub = document.getElementById('toastSub');
+  let toastTimer;
+  function showToast(title, sub){
+    toastTitle.textContent = title;
+    toastSub.textContent = sub;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove('show'), 2600);
+  }
+  document.querySelectorAll('[data-add]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const card = btn.closest('.card');
+      const name = card.dataset.name;
+      const price = card.dataset.price;
+      const list = getInquiryList();
+      list.push({name, price, addedAt: Date.now()});
+      saveInquiryList(list);
+      btn.textContent = 'Added ✓';
+      btn.classList.add('added');
+      showToast('Added to inquiry list', name + ' — ' + price);
+      setTimeout(() => { btn.textContent = 'Add to Inquiry'; btn.classList.remove('added'); }, 1800);
+    });
+  });
+
+  // ---- Mobile menu ----
+  const mobileToggle = document.getElementById('mobileToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const mobileClose = document.getElementById('mobileClose');
+  mobileToggle.addEventListener('click', () => mobileMenu.classList.add('open'));
+  mobileClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
+  document.querySelectorAll('[data-nav-mobile]').forEach(a => {
+    a.addEventListener('click', () => mobileMenu.classList.remove('open'));
+  });
+
+  // ---- Active nav highlight on scroll ----
+  const navLinks = document.querySelectorAll('[data-nav]');
+  const sections = ['home','about','catalog','services','contact'].map(id => document.getElementById(id)).filter(Boolean);
+  const navObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        const id = entry.target.id;
+        navLinks.forEach(l => {
+          if(l.getAttribute('href') === '#' + id){ l.classList.add('active'); }
+          else if(l.hasAttribute('href')){ l.classList.remove('active'); }
+        });
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  sections.forEach(s => navObserver.observe(s));
+
+  // ---- Modal (FAQ / Privacy / Shipping / Terms) ----
+  const modalContent = {
+    faq: {
+      title: 'Frequently Asked Questions',
+      body: `<p><strong style="color:#eef2fb">Do parts come with a warranty?</strong><br>Most performance parts carry a 12-month manufacturer warranty. Ask us about your specific item.</p>
+             <p><strong style="color:#eef2fb">How long does delivery take?</strong><br>In-stock items dispatch within 24 hours. Custom or model-specific parts may take 5–10 business days.</p>
+             <p><strong style="color:#eef2fb">Can I return a part?</strong><br>Unused parts in original packaging can be returned within 7 days of delivery.</p>`
+    },
+    privacy: {
+      title: 'Privacy Policy',
+      body: `<p>We collect only the information you share with us — name, phone, email, and vehicle details — to respond to inquiries and process orders.</p>
+             <p>We never sell your data to third parties. Information is stored securely and used solely to serve you better.</p>
+             <p>This is placeholder policy text. Replace with your finalized legal copy before going live.</p>`
+    },
+    shipping: {
+      title: 'Shipping Information',
+      body: `<p>We dispatch in-stock orders within 24 hours via trusted logistics partners across India.</p>
+             <p>Bulky items (wheels, exhausts, body kits) ship via surface freight; smaller parts ship via courier.</p>
+             <p>Tracking details are shared by SMS and email once your order is dispatched.</p>`
+    },
+    terms: {
+      title: 'Terms & Conditions',
+      body: `<p>All sales are subject to part availability and fitment confirmation prior to dispatch.</p>
+             <p>Prices listed are indicative and may vary based on vehicle-specific configuration.</p>
+             <p>This is placeholder terms text. Replace with your finalized legal copy before going live.</p>`
+    }
+  };
+  const modalOverlay = document.getElementById('modalOverlay');
+  const modalBody = document.getElementById('modalContent');
+  const modalClose = document.getElementById('modalClose');
+  document.querySelectorAll('[data-modal]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const key = link.dataset.modal;
+      const data = modalContent[key];
+      if(!data) return;
+      modalBody.innerHTML = `<h3>${data.title}</h3>${data.body}`;
+      modalOverlay.classList.add('open');
+    });
+  });
+  modalClose.addEventListener('click', () => modalOverlay.classList.remove('open'));
+  modalOverlay.addEventListener('click', (e) => { if(e.target === modalOverlay) modalOverlay.classList.remove('open'); });
+
+  // ---- Backend connection ----
+  // Once you deploy the backend (see README.md in the velora-backend folder),
+  // paste its live URL here. Until then, forms gracefully fall back to saving
+  // in the browser only, so the site still "works" with no backend configured.
+  const API_BASE_URL = 'https://YOUR-BACKEND-URL.onrender.com';
+  const BACKEND_CONFIGURED = !API_BASE_URL.includes('YOUR-BACKEND-URL');
+
+  // ---- Inquiry form: validation + real backend submit (with local fallback) ----
+  const inquiryForm = document.getElementById('inquiryForm');
+  const inquiryStatus = document.getElementById('inquiryStatus');
+  const inquirySubmitBtn = document.getElementById('inquirySubmitBtn');
+
+  function setFieldError(inputId, errorId, show){
+    document.getElementById(inputId).classList.toggle('invalid', show);
+    document.getElementById(errorId).classList.toggle('show', show);
+  }
+
+  inquiryForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const fullName = document.getElementById('fullName').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const partNeeded = document.getElementById('partNeeded').value.trim();
+    const carModel = document.getElementById('carModel').value.trim();
+
+    const nameValid = fullName.length > 1;
+    const phoneValid = /^[0-9+\-\s]{10,15}$/.test(phone);
+    const partValid = partNeeded.length > 3;
+
+    setFieldError('fullName','fullNameError', !nameValid);
+    setFieldError('phone','phoneError', !phoneValid);
+    setFieldError('partNeeded','partNeededError', !partValid);
+
+    inquiryStatus.classList.remove('show','success','error');
+
+    if(!nameValid || !phoneValid || !partValid){
+      inquiryStatus.textContent = 'Please fix the highlighted fields above.';
+      inquiryStatus.classList.add('show','error');
+      return;
+    }
+
+    inquirySubmitBtn.disabled = true;
+    inquirySubmitBtn.innerHTML = '<span class="btn-spinner"></span>Sending...';
+
+    const cartItems = getInquiryList();
+
+    let savedRemotely = false;
+    if (BACKEND_CONFIGURED) {
+      try {
+        const resp = await fetch(API_BASE_URL + '/api/inquiry', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ fullName, phone, carModel, partNeeded, items: cartItems })
+        });
+        const data = await resp.json();
+        if (resp.ok && data.ok) {
+          savedRemotely = true;
+        } else if (data.errors) {
+          setFieldError('fullName','fullNameError', !!data.errors.fullName);
+          setFieldError('phone','phoneError', !!data.errors.phone);
+          setFieldError('partNeeded','partNeededError', !!data.errors.partNeeded);
+          inquiryStatus.textContent = 'Please fix the highlighted fields above.';
+          inquiryStatus.classList.add('show','error');
+          inquirySubmitBtn.disabled = false;
+          inquirySubmitBtn.textContent = 'Send Inquiry';
+          return;
+        }
+      } catch(networkErr) {
+        console.warn('[inquiry] backend unreachable, falling back to local save:', networkErr.message);
+      }
+    }
+
+    try {
+      // Always keep a local copy too, even on success — harmless redundancy.
+      const submissions = JSON.parse(localStorage.getItem('velora_inquiries') || '[]');
+      submissions.push({ fullName, phone, carModel, partNeeded, submittedAt: new Date().toISOString(), savedRemotely });
+      localStorage.setItem('velora_inquiries', JSON.stringify(submissions));
+
+      inquiryStatus.textContent = 'Thanks, ' + fullName.split(' ')[0] + ' — we will call you back shortly.';
+      inquiryStatus.classList.add('show','success');
+      inquiryForm.reset();
+      saveInquiryList([]); // clear the "added to inquiry" cart now that it's been submitted
+    } catch(err){
+      inquiryStatus.textContent = 'Something went wrong. Please call us directly at +91 95941 02353.';
+      inquiryStatus.classList.add('show','error');
+    } finally {
+      inquirySubmitBtn.disabled = false;
+      inquirySubmitBtn.textContent = 'Send Inquiry';
+    }
+  });
+
+  // ---- Newsletter form ----
+  const newsletterForm = document.getElementById('newsletterForm');
+  const newsletterMsg = document.getElementById('newsletterMsg');
+  const newsletterEmail = document.getElementById('newsletterEmail');
+  const newsletterBtn = document.getElementById('newsletterBtn');
+
+  newsletterForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = newsletterEmail.value.trim();
+    const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    newsletterMsg.classList.remove('show','success','error');
+    newsletterEmail.classList.toggle('invalid', !valid);
+
+    if(!valid){
+      newsletterMsg.textContent = 'Please enter a valid email address.';
+      newsletterMsg.classList.add('show','error');
+      return;
+    }
+
+    newsletterBtn.disabled = true;
+    const originalText = newsletterBtn.textContent;
+    newsletterBtn.innerHTML = '<span class="btn-spinner"></span>Subscribing...';
+
+    let savedRemotely = false;
+    if (BACKEND_CONFIGURED) {
+      try {
+        const resp = await fetch(API_BASE_URL + '/api/newsletter', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email })
+        });
+        const data = await resp.json();
+        if (resp.ok && data.ok) {
+          savedRemotely = true;
+        } else if (data.errors) {
+          newsletterEmail.classList.add('invalid');
+          newsletterMsg.textContent = data.errors.email || 'Please enter a valid email address.';
+          newsletterMsg.classList.add('show','error');
+          newsletterBtn.disabled = false;
+          newsletterBtn.textContent = originalText;
+          return;
+        }
+      } catch(networkErr){
+        console.warn('[newsletter] backend unreachable, falling back to local save:', networkErr.message);
+      }
+    }
+
+    try {
+      const subs = JSON.parse(localStorage.getItem('velora_newsletter') || '[]');
+      if(!subs.includes(email)) subs.push(email);
+      localStorage.setItem('velora_newsletter', JSON.stringify(subs));
+      newsletterMsg.textContent = "You're subscribed! Watch your inbox for offers.";
+      newsletterMsg.classList.add('show','success');
+      newsletterForm.reset();
+    } catch(err){
+      newsletterMsg.textContent = 'Something went wrong — please try again.';
+      newsletterMsg.classList.add('show','error');
+    } finally {
+      newsletterBtn.disabled = false;
+      newsletterBtn.textContent = originalText;
+    }
+  });
+</script>
+
+</body>
+</html>

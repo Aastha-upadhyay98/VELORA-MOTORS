@@ -1,0 +1,8 @@
+# Backend secrets and dependencies
+backend/node_modules/
+backend/.env
+*.log
+
+# OS/editor noise
+.DS_Store
+.vscode/*.log
